@@ -1,0 +1,1706 @@
+/* Bitebuddy Defs */
+.section.hero {
+  background-image: url("images/bitebuddy-background.png");
+  background-position: 50%;
+  background-repeat: repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 300vh;
+  }
+
+.svg {
+  background-image: url("images/bitebuddy-background.png");
+  background-position: 50%;
+  background-size: cover;
+  background-attachment: fixed;
+  border-radius: 10px;
+  width: 115%;
+  max-width: 115%;
+  margin-top: 0;
+  margin-bottom: 3vh;
+  position: relative;
+  left: -63px;
+
+  /* 👇 Glass effect */
+  background-color: rgba(255, 255, 255, 0.05);
+
+  /* 👇 Border + shadow to mimic glass */
+  border: 0px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.301),
+    0 0 0 1vw rgba(0, 0, 0, 0);
+}
+
+
+.glass-container {
+  position: relative;
+  display: inline-block;
+  border-radius: 30px;
+  overflow: visible;
+  z-index: 0;
+}
+
+.glass-container::before {
+  content: "";
+  position: absolute;
+  top: -250px;
+  left: -250px;
+  right: -250px;
+  bottom: -250px;
+
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  background-color: rgba(0, 0, 0, 0.3);
+  background-image: linear-gradient(125deg, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0));
+  background-blend-mode: lighten;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 0 0 0.5px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(255, 255, 255, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  border-radius: 30px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+
+
+
+
+
+@property --angle-1 {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: -75deg;
+  }
+
+  @property --angle-2 {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: -45deg;
+  }
+
+
+    :root {
+      --global--size: clamp(2rem, 4vw, 5rem);
+      --anim--hover-time: 400ms;
+      --anim--hover-ease: cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* ========== BUTTON ========== */
+
+    /* Button Wrap Container */
+    .button-wrap {
+      font-size: var(--global--size);
+        font-family: "Inter", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
+      z-index: 2;
+      border-radius: 999vw;
+      background: transparent;
+      pointer-events: none;
+      transition: all var(--anim--hover-time) var(--anim--hover-ease);
+    }
+
+    /* Button Shadow Container */
+    .button-wrap .button-shadow {
+      --shadow-cuttoff-fix: 2em;
+      position: absolute;
+      width: calc(100% + var(--shadow-cuttoff-fix));
+      height: calc(100% + var(--shadow-cuttoff-fix));
+      top: calc(0% - var(--shadow-cuttoff-fix) / 2);
+      left: calc(0% - var(--shadow-cuttoff-fix) / 2);
+      filter: blur(clamp(2px, 0.125em, 12px));
+      -webkit-filter: blur(clamp(2px, 0.125em, 12px));
+      -moz-filter: blur(clamp(2px, 0.125em, 12px));
+      -ms-filter: blur(clamp(2px, 0.125em, 12px));
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    /* Shadow */
+    .button-wrap .button-shadow::after {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      border-radius: 999vw;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
+      width: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
+      height: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
+      top: calc(var(--shadow-cuttoff-fix) - 0.5em);
+      left: calc(var(--shadow-cuttoff-fix) - 0.875em);
+      padding: 0.125em;
+      box-sizing: border-box;
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      transition: all var(--anim--hover-time) var(--anim--hover-ease);
+      overflow: visible;
+      opacity: 1;
+    }
+
+    /* ========== BUTTON BASE STYLES ========== */
+
+    .button-wrap button {
+      /* Basic Styling */
+      --border-width: clamp(1px, 0.0625em, 4px);
+      all: unset;
+      cursor: pointer;
+      position: relative;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      pointer-events: auto;
+      z-index: 3;
+      background: linear-gradient(
+        -75deg,
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.05)
+      );
+      border-radius: 999vw;
+      box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
+        inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5),
+        0 0.25em 0.125em -0.125em rgba(0, 0, 0, 0.2),
+        0 0 0.1em 0.25em inset rgba(255, 255, 255, 0.2),
+        0 0 0 0 rgba(255, 255, 255, 1);
+      backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+      -webkit-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+      -moz-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+      -ms-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+      transition: all var(--anim--hover-time) var(--anim--hover-ease);
+    }
+
+    .button-wrap button:hover {
+      transform: scale(0.975);
+      backdrop-filter: blur(0.01em);
+      -webkit-backdrop-filter: blur(0.01em);
+      -moz-backdrop-filter: blur(0.01em);
+      -ms-backdrop-filter: blur(0.01em);
+      box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
+        inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5),
+        0 0.15em 0.05em -0.1em rgba(0, 0, 0, 0.25),
+        0 0 0.05em 0.1em inset rgba(255, 255, 255, 0.5),
+        0 0 0 0 rgba(255, 255, 255, 1);
+    }
+
+    /* Button Text */
+    .button-wrap button span {
+      position: relative;
+      display: block;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      font-family: "Inter", sans-serif;
+      letter-spacing: -0.05em;
+      font-weight: 500;
+      font-size: 1em;
+      color: rgba(50, 50, 50, 1);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-shadow: 0em 0.25em 0.05em rgba(0, 0, 0, 0.1);
+      transition: all var(--anim--hover-time) var(--anim--hover-ease);
+      padding-inline: 1.5em;
+      padding-block: 0.875em;
+    }
+
+    .button-wrap button:hover span {
+      text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.12);
+    }
+
+    /* Text */
+    .button-wrap button span::after {
+      content: "";
+      display: block;
+      position: absolute;
+      z-index: 1;
+      width: calc(100% - var(--border-width)); /* Prevent overlapping border */
+      height: calc(100% - var(--border-width));
+      top: calc(0% + var(--border-width) / 2);
+      left: calc(0% + var(--border-width) / 2);
+      box-sizing: border-box;
+      border-radius: 999vw;
+      overflow: clip;
+      background: linear-gradient(
+        var(--angle-2),
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.5) 40% 50%,
+        rgba(255, 255, 255, 0) 55%
+      );
+      z-index: 3;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      background-size: 200% 200%;
+      background-position: 0% 50%;
+      background-repeat: no-repeat;
+      transition: background-position calc(var(--anim--hover-time) * 1.25)
+          var(--anim--hover-ease),
+        --angle-2 calc(var(--anim--hover-time) * 1.25) var(--anim--hover-ease);
+    }
+
+    .button-wrap button:hover span::after {
+      background-position: 25% 50%;
+    }
+
+    .button-wrap button:active span::after {
+      background-position: 50% 15%;
+      --angle-2: -15deg;
+    }
+
+    /* Touch Devices */
+    @media (hover: none) and (pointer: coarse) {
+      .button-wrap button span::after,
+      .button-wrap button:active span::after {
+        --angle-2: -45deg;
+      }
+    }
+
+    /* ========== BUTTON OUTLINE ========== */
+
+    /* Outline */
+    .button-wrap button::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      border-radius: 999vw;
+      width: calc(100% + var(--border-width));
+      height: calc(100% + var(--border-width));
+      top: calc(0% - var(--border-width) / 2);
+      left: calc(0% - var(--border-width) / 2);
+      padding: var(--border-width);
+      box-sizing: border-box;
+      background: conic-gradient(
+          from var(--angle-1) at 50% 50%,
+          rgba(0, 0, 0, 0.5),
+          rgba(0, 0, 0, 0) 5% 40%,
+          rgba(0, 0, 0, 0.5) 50%,
+          rgba(0, 0, 0, 0) 60% 95%,
+          rgba(0, 0, 0, 0.5)
+        ),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      transition: all var(--anim--hover-time) var(--anim--hover-ease),
+        --angle-1 500ms ease;
+      box-shadow: inset 0 0 0 calc(var(--border-width) / 2) rgba(255, 255, 255, 0.5);
+    }
+
+    .button-wrap button:hover::after {
+      --angle-1: -125deg;
+    }
+
+    .button-wrap button:active::after {
+      --angle-1: -75deg;
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .button-wrap button::after,
+      .button-wrap button:hover::after,
+      .button-wrap button:active::after {
+        --angle-1: -75deg;
+      }
+    }
+
+    /* Shadow Hover */
+    .button-wrap:has(button:hover) .button-shadow {
+      filter: blur(clamp(2px, 0.0625em, 6px));
+      -webkit-filter: blur(clamp(2px, 0.0625em, 6px));
+      -moz-filter: blur(clamp(2px, 0.0625em, 6px));
+      -ms-filter: blur(clamp(2px, 0.0625em, 6px));
+      transition: filter var(--anim--hover-time) var(--anim--hover-ease);
+    }
+
+    .button-wrap:has(button:hover) .button-shadow::after {
+      top: calc(var(--shadow-cuttoff-fix) - 0.875em);
+      opacity: 1;
+    }
+
+    /* Rotation */
+    .button-wrap:has(button:active) {
+      transform: rotate3d(1, 0, 0, 25deg);
+    }
+
+    .button-wrap:has(button:active) button {
+      box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
+        inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5),
+        0 0.125em 0.125em -0.125em rgba(0, 0, 0, 0.2),
+        0 0 0.1em 0.25em inset rgba(255, 255, 255, 0.2),
+        0 0.225em 0.05em 0 rgba(0, 0, 0, 0.05),
+        0 0.25em 0 0 rgba(255, 255, 255, 0.75),
+        inset 0 0.25em 0.05em 0 rgba(0, 0, 0, 0.15);
+    }
+
+    .button-wrap:has(button:active) .button-shadow {
+      filter: blur(clamp(2px, 0.125em, 12px));
+      -webkit-filter: blur(clamp(2px, 0.125em, 12px));
+      -moz-filter: blur(clamp(2px, 0.125em, 12px));
+      -ms-filter: blur(clamp(2px, 0.125em, 12px));
+    }
+
+    .button-wrap:has(button:active) .button-shadow::after {
+      top: calc(var(--shadow-cuttoff-fix) - 0.5em);
+      opacity: 0.75;
+    }
+
+    .button-wrap:has(button:active) span {
+      text-shadow: 0.025em 0.25em 0.05em rgba(0, 0, 0, 0.12);
+    }
+
+    /* Defs */
+    @property --angle-1 {
+        syntax: '<angle>';
+        inherits: false;
+        initial-value: -75deg;
+      }
+
+      @property --angle-2 {
+        syntax: '<angle>';
+        inherits: false;
+        initial-value: -45deg;
+      }
+
+
+        :root {
+          --global--size: clamp(2rem, 4vw, 5rem);
+          --anim--hover-time: 400ms;
+          --anim--hover-ease: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* ========== BUTTON ========== */
+
+        /* Button Wrap Container */
+        .button-wrap {
+          font-size: var(--global--size);
+            font-family: "Inter", sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          position: relative;
+          z-index: 2;
+          border-radius: 999vw;
+          background: transparent;
+          pointer-events: none;
+          transition: all var(--anim--hover-time) var(--anim--hover-ease);
+        }
+
+        /* Button Shadow Container */
+        .button-wrap .button-shadow {
+          --shadow-cuttoff-fix: 2em;
+          position: absolute;
+          width: calc(100% + var(--shadow-cuttoff-fix));
+          height: calc(100% + var(--shadow-cuttoff-fix));
+          top: calc(0% - var(--shadow-cuttoff-fix) / 2);
+          left: calc(0% - var(--shadow-cuttoff-fix) / 2);
+          filter: blur(clamp(2px, 0.125em, 12px));
+          -webkit-filter: blur(clamp(2px, 0.125em, 12px));
+          -moz-filter: blur(clamp(2px, 0.125em, 12px));
+          -ms-filter: blur(clamp(2px, 0.125em, 12px));
+          overflow: visible;
+          pointer-events: none;
+        }
+
+        /* Shadow */
+        .button-wrap .button-shadow::after {
+          content: "";
+          position: absolute;
+          z-index: 0;
+          inset: 0;
+          border-radius: 999vw;
+          background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
+          width: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
+          height: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
+          top: calc(var(--shadow-cuttoff-fix) - 0.5em);
+          left: calc(var(--shadow-cuttoff-fix) - 0.875em);
+          padding: 0.125em;
+          box-sizing: border-box;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+          transition: all var(--anim--hover-time) var(--anim--hover-ease);
+          overflow: visible;
+          opacity: 1;
+        }
+
+        /* ========== BUTTON BASE STYLES ========== */
+
+        .button-wrap button {
+          /* Basic Styling */
+          --border-width: clamp(1px, 0.0625em, 4px);
+          all: unset;
+          cursor: pointer;
+          position: relative;
+          -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+          pointer-events: auto;
+          z-index: 3;
+          background: linear-gradient(
+            -75deg,
+            rgba(255, 255, 255, 0.05),
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.05)
+          );
+          border-radius: 999vw;
+          box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
+            inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5),
+            0 0.25em 0.125em -0.125em rgba(0, 0, 0, 0.2),
+            0 0 0.1em 0.25em inset rgba(255, 255, 255, 0.2),
+            0 0 0 0 rgba(255, 255, 255, 1);
+          backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+          -webkit-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+          -moz-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+          -ms-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+          transition: all var(--anim--hover-time) var(--anim--hover-ease);
+        }
+
+        .button-wrap button:hover {
+          transform: scale(0.975);
+          backdrop-filter: blur(0.01em);
+          -webkit-backdrop-filter: blur(0.01em);
+          -moz-backdrop-filter: blur(0.01em);
+          -ms-backdrop-filter: blur(0.01em);
+          box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
+            inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5),
+            0 0.15em 0.05em -0.1em rgba(0, 0, 0, 0.25),
+            0 0 0.05em 0.1em inset rgba(255, 255, 255, 0.5),
+            0 0 0 0 rgba(255, 255, 255, 1);
+        }
+
+        /* Button Text */
+        .button-wrap button span {
+          position: relative;
+          display: block;
+          user-select: none;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          font-family: "Inter", sans-serif;
+          letter-spacing: -0.05em;
+          font-weight: 500;
+          font-size: 1em;
+          color: rgba(50, 50, 50, 1);
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-shadow: 0em 0.25em 0.05em rgba(0, 0, 0, 0.1);
+          transition: all var(--anim--hover-time) var(--anim--hover-ease);
+          padding-inline: 1.5em;
+          padding-block: 0.875em;
+        }
+
+        .button-wrap button:hover span {
+          text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.12);
+        }
+
+        /* Text */
+        .button-wrap button span::after {
+          content: "";
+          display: block;
+          position: absolute;
+          z-index: 1;
+          width: calc(100% - var(--border-width)); /* Prevent overlapping border */
+          height: calc(100% - var(--border-width));
+          top: calc(0% + var(--border-width) / 2);
+          left: calc(0% + var(--border-width) / 2);
+          box-sizing: border-box;
+          border-radius: 999vw;
+          overflow: clip;
+          background: linear-gradient(
+            var(--angle-2),
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.5) 40% 50%,
+            rgba(255, 255, 255, 0) 55%
+          );
+          z-index: 3;
+          mix-blend-mode: screen;
+          pointer-events: none;
+          -webkit-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          background-size: 200% 200%;
+          background-position: 0% 50%;
+          background-repeat: no-repeat;
+          transition: background-position calc(var(--anim--hover-time) * 1.25)
+              var(--anim--hover-ease),
+            --angle-2 calc(var(--anim--hover-time) * 1.25) var(--anim--hover-ease);
+        }
+
+        .button-wrap button:hover span::after {
+          background-position: 25% 50%;
+        }
+
+        .button-wrap button:active span::after {
+          background-position: 50% 15%;
+          --angle-2: -15deg;
+        }
+
+        /* Touch Devices */
+        @media (hover: none) and (pointer: coarse) {
+          .button-wrap button span::after,
+          .button-wrap button:active span::after {
+            --angle-2: -45deg;
+          }
+        }
+
+        /* ========== BUTTON OUTLINE ========== */
+
+        /* Outline */
+        .button-wrap button::after {
+          content: "";
+          position: absolute;
+          z-index: 1;
+          inset: 0;
+          border-radius: 999vw;
+          width: calc(100% + var(--border-width));
+          height: calc(100% + var(--border-width));
+          top: calc(0% - var(--border-width) / 2);
+          left: calc(0% - var(--border-width) / 2);
+          padding: var(--border-width);
+          box-sizing: border-box;
+          background: conic-gradient(
+              from var(--angle-1) at 50% 50%,
+              rgba(0, 0, 0, 0.5),
+              rgba(0, 0, 0, 0) 5% 40%,
+              rgba(0, 0, 0, 0.5) 50%,
+              rgba(0, 0, 0, 0) 60% 95%,
+              rgba(0, 0, 0, 0.5)
+            ),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+          transition: all var(--anim--hover-time) var(--anim--hover-ease),
+            --angle-1 500ms ease;
+          box-shadow: inset 0 0 0 calc(var(--border-width) / 2) rgba(255, 255, 255, 0.5);
+        }
+
+        .button-wrap button:hover::after {
+          --angle-1: -125deg;
+        }
+
+        .button-wrap button:active::after {
+          --angle-1: -75deg;
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+          .button-wrap button::after,
+          .button-wrap button:hover::after,
+          .button-wrap button:active::after {
+            --angle-1: -75deg;
+          }
+        }
+
+        /* Shadow Hover */
+        .button-wrap:has(button:hover) .button-shadow {
+          filter: blur(clamp(2px, 0.0625em, 6px));
+          -webkit-filter: blur(clamp(2px, 0.0625em, 6px));
+          -moz-filter: blur(clamp(2px, 0.0625em, 6px));
+          -ms-filter: blur(clamp(2px, 0.0625em, 6px));
+          transition: filter var(--anim--hover-time) var(--anim--hover-ease);
+        }
+
+        .button-wrap:has(button:hover) .button-shadow::after {
+          top: calc(var(--shadow-cuttoff-fix) - 0.875em);
+          opacity: 1;
+        }
+
+        /* Rotation */
+        .button-wrap:has(button:active) {
+          transform: rotate3d(1, 0, 0, 25deg);
+        }
+
+        .button-wrap:has(button:active) button {
+          box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
+            inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5),
+            0 0.125em 0.125em -0.125em rgba(0, 0, 0, 0.2),
+            0 0 0.1em 0.25em inset rgba(255, 255, 255, 0.2),
+            0 0.225em 0.05em 0 rgba(0, 0, 0, 0.05),
+            0 0.25em 0 0 rgba(255, 255, 255, 0.75),
+            inset 0 0.25em 0.05em 0 rgba(0, 0, 0, 0.15);
+        }
+
+        .button-wrap:has(button:active) .button-shadow {
+          filter: blur(clamp(2px, 0.125em, 12px));
+          -webkit-filter: blur(clamp(2px, 0.125em, 12px));
+          -moz-filter: blur(clamp(2px, 0.125em, 12px));
+          -ms-filter: blur(clamp(2px, 0.125em, 12px));
+        }
+
+        .button-wrap:has(button:active) .button-shadow::after {
+          top: calc(var(--shadow-cuttoff-fix) - 0.5em);
+          opacity: 0.75;
+        }
+
+        .button-wrap:has(button:active) span {
+          text-shadow: 0.025em 0.25em 0.05em rgba(0, 0, 0, 0.12);
+        }
+
+        .button-wrap {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+          }
+
+          .button-wrap button {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+          }
+
+          .button-wrap button span {
+            padding: 0;
+            width: 100%;
+            height: 100%;
+          }
+
+          .center-button-container-2 {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .span-2 {
+            background-image: url("images/site-live.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 24px 24px;
+          }
+
+
+        .div-block-6 {
+            margin-top: 20px;
+          }
+
+          .w-webflow-badge {
+            display: none !important;
+          }
+
+          .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+          }
+
+          .reveal-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+          }
+
+/* ==============================
+   High-fidelity 2-column section
+   ============================== */
+
+   .hf-feature-row {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(320px, 460px);
+    gap: 64px;
+    align-items: center;
+    width: 100%;
+    margin: 48px 0 72px;
+  }
+
+  .hf-feature-row2 {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(320px, 460px);
+    gap: 64px;
+    align-items: center;
+    width: 100%;
+    margin: 48px 0 150px;
+  }
+
+  .hf-feature-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hf-feature-card {
+    width: 100%;
+    max-width: 520px;
+    min-height: 210px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #111111 0%, #171717 100%);
+    color: #ffffff;
+    padding: 34px 38px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /*box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);*/
+    margin-bottom: 36px;
+  }
+
+  .hf-feature-icon {
+    font-size: 54px;
+    line-height: 1;
+    font-weight: 300;
+    margin-bottom: 22px;
+    color: #ffffff;
+  }
+
+  .hf-feature-label {
+    font-family: Inter, sans-serif;
+    font-size: 28px;
+    line-height: 1.35;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+  }
+
+  .hf-feature-label strong {
+    font-weight: 700;
+  }
+
+  .hf-feature-title {
+    margin: 0 0 18px;
+    font-family: Inter, sans-serif;
+    font-size: 34px;
+    line-height: 1.1;
+    font-weight: 800;
+    color: #111111;
+  }
+
+  .hf-feature-description {
+    max-width: 560px;
+    margin: 0;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
+    color: #1d1d1f;
+    text-align: left;
+  }
+
+  .hf-feature-description strong {
+    font-weight: 700;
+  }
+
+  .hf-feature-image-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hf-feature-image {
+    width: 100%;
+    max-width: 420px;
+    display: block;
+    border-radius: 28px;
+    /*box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);*/
+  }
+
+  /* Tablet */
+  @media screen and (max-width: 991px) {
+    .hf-feature-row {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin: 40px 0 60px;
+    }
+
+    .hf-feature-text {
+      order: 1;
+    }
+
+    .hf-feature-image-wrap {
+      order: 2;
+      justify-content: flex-start;
+    }
+
+    .hf-feature-card {
+      max-width: 100%;
+      min-height: 190px;
+      padding: 30px 30px;
+      margin-bottom: 28px;
+    }
+
+    .hf-feature-label {
+      font-size: 24px;
+    }
+
+    .hf-feature-title {
+      font-size: 30px;
+    }
+
+    .hf-feature-description {
+      font-size: 20px;
+    }
+
+    .hf-feature-image {
+      max-width: 380px;
+    }
+  }
+
+  /* Mobile */
+  @media screen and (max-width: 767px) {
+    .hf-feature-row {
+      gap: 28px;
+      margin: 32px 0 48px;
+    }
+
+    .hf-feature-card {
+      min-height: auto;
+      padding: 24px 22px;
+      border-radius: 18px;
+    }
+
+    .hf-feature-icon {
+      font-size: 42px;
+      margin-bottom: 18px;
+    }
+
+    .hf-feature-label {
+      font-size: 20px;
+    }
+
+    .hf-feature-title {
+      font-size: 20px;
+      margin-bottom: 14px;
+    }
+
+    .hf-feature-description {
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .hf-feature-image {
+      max-width: 100%;
+      border-radius: 22px;
+    }
+  }
+
+
+/* ================= ARTERA ONLY — scoped theo body.body-2 ================= */
+/* ================= ARTERA ONLY (không ảnh hưởng BiteBuddy) ================= */
+.body-2 .svg{
+  background-image: url("images/artera-background.png") !important;
+  background-position: 50% !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important; /* giữ cảm giác parallax như cũ */
+  /* giữ nguyên các thuộc tính .svg khác (width, left, glass…) từ CSS hiện tại */
+}
+
+/* ================== ARTERA ONLY ================== */
+.body-2 .section.hero{
+  background-image: url("images/artera-background.png") !important;
+  background-position: 50% !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+
+
+
+.body-2{
+  /* chỉnh nhanh kích thước tại đây */
+  --artera-container-max: 970px; /* bề rộng container desktop */
+  --artera-media-max: 960px;      /* trần bề rộng video/Figma */
+}
+
+/* Nới container của #gallery (desktop) */
+@media (min-width: 900px){
+  .body-2 #gallery .centered-container.w-container{
+    max-width: var(--artera-container-max) !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* Project Overview (YouTube trong .ratio-box) */
+.body-2 #gallery .ratio-box{
+  width: 100% !important;
+  max-width: var(--artera-media-max) !important;
+  margin: 24px auto !important;
+  position: relative !important;
+  aspect-ratio: 16/9 !important;
+}
+.body-2 #gallery .ratio-box > iframe{
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  display: block !important;
+}
+
+/* Walkthrough (Webflow video block dùng Embedly) */
+.body-2 #gallery .w-video.w-embed{
+  position: relative !important;
+  width: 100% !important;
+  max-width: var(--artera-media-max) !important;
+  margin: 24px auto !important;
+  height: 0 !important;
+  padding: 0 !important;
+  padding-top: 56.25% !important; /* 16:9 */
+  overflow: hidden !important;
+}
+.body-2 #gallery .w-video.w-embed > iframe,
+.body-2 #gallery .w-video.w-embed > .embedly-embed{
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  display: block !important;
+}
+
+/* Figma (code-embed) */
+.body-2 #gallery .code-embed.w-embed.w-iframe{
+  max-width: var(--artera-media-max) !important;
+  margin: 24px auto !important;
+}
+.body-2 #gallery .code-embed.w-embed.w-iframe iframe{
+  width: 100% !important;
+  height: min(70vh, 560px) !important;
+}
+
+/* (tùy chọn) viền debug — đổi 0 thành 4px để kiểm tra */
+.body-2 #gallery .ratio-box{ outline: 0 dashed hotpink !important; }
+
+/* ===== Artera: glass chỉ quanh khối, không phủ toàn màn hình ===== */
+.body-2 .glass-artera{
+  position: relative;
+  display: block;
+  /* chuyển width/left từ .svg sang wrapper để pseudo-element bám đúng khung */
+  width: 115%;
+  max-width: 115%;
+  left: -63px;
+  margin-top: 0;
+  margin-bottom: 3vh;
+  border-radius: 30px;
+  overflow: visible;
+  z-index: 0; /* tạo stacking context cho ::before */
+}
+
+/* Artera: chỉnh ::before không còn “-250px” (tránh cảm giác full-screen) */
+.body-2 .glass-artera::before{
+  content: "";
+  position: absolute;
+  top: -99px;
+  left: -185px;
+  right: -185px;
+  bottom: -126px;
+
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  background-color: rgba(0, 0, 0, 0.3);
+  background-image: linear-gradient(125deg, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0));
+  background-blend-mode: lighten;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 0 0 0.5px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(255, 255, 255, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  border-radius: 30px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Artera: ảnh bên trong — giữ nội dung, nhưng để wrapper điều khiển kích thước/position */
+.body-2 .glass-artera > .svg{
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  left: 0;                 /* bỏ left:-63px ở img để không lệch khỏi khung glass */
+  border-radius: 10px;     /* đồng bộ bo tròn với wrapper */
+
+  /* vẫn dùng nền “fixed” sau lớp PNG để thấy xuyên chữ (giống BiteBuddy) */
+  background-image: url("images/artera-background.png") !important;
+  background-position: 50% !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+
+  /* bỏ “giả glass” trên chính ảnh để không chồng hiệu ứng */
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ===== Back button (giữ màu/kiểu/font đang thừa kế) ===== */
+.back_btn {
+  display: inline-flex;           /* thay w-inline-block + align nội bộ */
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.back_btn .image-14 {
+  display: block;
+  width: 20px;    /* không đổi màu, chỉ đảm bảo kích thước icon ổn định */
+  height: 20px;
+}
+
+.back_btn .text-block-7 {
+  /* KHÔNG set màu hay font để giữ nguyên màu/kiểu chữ như đang hiển thị */
+  line-height: 1;
+  white-space: nowrap;
+}
+
+element.style {
+  transform: translate3d(26.113%, 100%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.aoh_line-bg-5-artera {
+  max-width: 300px;
+}
+
+.aoh_line-bg-5-artera {
+  background-color: #fff;
+  border-radius: 12px;
+  max-width: 18rem;
+  height: 400px;
+  padding: 1.5px;
+  font-size: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.aoh_inner-5-artera:hover {
+  background-color: #fffffff2;
+}
+
+.aoh_inner-5-artera {
+  z-index: 5;
+  grid-column-gap: .75rem;
+  grid-row-gap: .75rem;
+  background-color: #f8f8f8c4;
+  border-radius: 11px;
+  flex-flow: column;
+  height: 397px;
+  padding: 2rem;
+  transition: background-color .3s;
+  display: flex;
+  position: relative;
+}
+
+
+@media screen and (min-width: 1280px) {
+  .heading-18-artera {
+    color: #5b5b9e;
+    text-align: left;
+    margin: 0;
+    font-family: Inter, sans-serif;
+    font-size: 30px;
+    font-weight: 900;
+  }
+}
+
+.paragraph-13.sub-artera {
+  color: #5b5b9e;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+
+.aoh-container-5-artera {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0%;
+}
+
+@media screen and (min-width: 1280px) {
+  .paragraph-13-artera {
+    color: #000;
+    text-align: left;
+    margin: 0;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+
+.aoh-wrap-5-artera {
+  justify-content: center;
+  align-items: center;
+  width: 1px;
+  height: 1px;
+  display: flex;
+  position: absolute;
+  inset: 0% auto auto 0%;
+}
+
+.aoh-orb-5-artera {
+  aspect-ratio: 1;
+  filter: blur(3rem);
+  background-color: #5b5b9e;
+  width: 9rem;
+  height: 9rem;
+  position: relative;
+}
+
+
+element.style {
+  opacity: 1;
+}
+
+/* Layout khu vực hiển thị */
+.prototype-section {
+  width: 100%;
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
+/* Khối overlay: prototype bên dưới + phone mockup đè lên */
+.mockup-proto {
+  position: relative;
+  margin: 0 auto;
+  width: 257.4px;      /* chiều rộng khung điện thoại (thay đổi nếu cần) */
+}
+
+/* Chiều cao prototype: CHỈNH Ở ĐÂY
+   - 640px: tỉ lệ dọc thoải mái cho khung 360px
+   - Bạn có thể tăng/giảm giá trị này để vừa khung, vd: 680px hoặc 720px
+*/
+.proto-frame {
+  position: relative;
+  width: 257.4px;
+  height: 534.39px;        /* phải có height cố định để center theo dọc */
+  overflow: hidden;
+  margin: 0 auto;   /* <-- căn giữa */
+  display: flex;
+  align-items: center;      /* center theo dọc */
+  justify-content: center;
+  border-radius: 38px;
+}
+
+/* Iframe XD fill toàn bộ khung chứa */
+.xd-embed {
+  margin-top: 18px;
+  width: 249px;
+  height: 541px;
+  border: 0;
+  display: block;
+  border-radius: 38px;
+}
+
+/* Ảnh phone mockup PNG đè lên (giả định phần màn hình trong PNG trong suốt) */
+.phone-frame {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 257.4px;
+  height: 540px;      /* khớp với .mockup-proto width */
+  max-width: 100%;
+  z-index: 10;
+  pointer-events: none; /* không chặn thao tác trên iframe */
+}
+
+/* Responsive: thu nhỏ trên màn hình hẹp */
+@media (max-width: 480px) {
+  .mockup-proto,
+  .proto-frame,
+  .phone-frame {
+    width: 236px;
+    height: 490px;          /* giữ đồng bộ để overlay khít */
+  }
+
+  .xd-embed {
+    width: 230px;
+    height: 476px;
+  }
+}
+
+/* Swiper cần có kích thước hiển thị */
+.swiper { width: 100%; min-width: 0; }
+.swiper-wrapper { box-sizing: border-box; }
+
+/* Cho thumbnails hiển thị 1 dòng (nếu muốn nhiều hơn, đổi slidesPerView trong JS) */
+/* chỉ áp cho thumbs khi đang nằm ngang (mobile), tránh ảnh hưởng layout khác */
+@media (max-width: 991px){
+  .cc-how-slider-thumbs .swiper-slide{ width: auto; }
+}
+
+/* MAIN slider luôn đúng layout */
+.cc-how-slider .swiper-slide{ width: 100% !important; }
+/* Ngăn ảnh bị inline-gap */
+.phone-screen_img-2,
+.phone-screen_img { display: block; width: 100%; height: auto; }
+
+/* ===== Scoped slider styles to avoid global impact ===== */
+#artera-swipers .swiper-slide-thumb-active .swiper-slider_details-collapse {
+  display: block;
+}
+
+/* Khoảng cách giữa các block (tùy thích) */
+#artera-swipers .how-block + .how-block {
+  margin-top: 4rem;
+}
+
+/* Remove phone mockup look & keep only the image (scoped) */
+#artera-swipers .phone-mock,
+#artera-swipers .phone-screen_wrapper,
+#artera-swipers .phone-screen {
+  all: unset;
+  display: block !important;
+  width: 100% !important;
+}
+
+#artera-swipers .phone-mock_tab,
+#artera-swipers .phone-mock_border {
+  display: none !important;
+}
+
+#artera-swipers .phone-screen_img,
+#artera-swipers .phone-screen_img-2 {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  border-radius: 12px;
+  box-shadow: none !important;
+}
+
+/* đảm bảo slide không còn layout lạ từ mockup */
+#artera-swipers .cc-how-slider .swiper-slide {
+  display: block !important;
+}
+
+.slider-arrow, .slider-arrow-2,
+.cc-how-slide-left, .cc-how-slide-right {
+  position: absolute;
+  z-index: 5;
+  pointer-events: auto;
+}
+
+
+.vr-scenes .u-position-relative { position: relative; z-index: 1; }
+
+/* Chỉ ảnh hưởng khu vực thumbs */
+.vr-scenes .column-4 .swiper,
+.vr-scenes .column-6 .swiper {
+  max-height: 80vh;
+  overflow: auto;        /* tránh đẩy nội dung phía dưới biến mất */
+}
+
+/* Đảm bảo wrapper luôn flex đúng từ Swiper CSS */
+.swiper { width: 100%; min-width: 0; }
+.swiper-wrapper { display: flex; box-sizing: border-box; }
+
+/* đảm bảo arrow luôn click được + không bị layer Webflow đè */
+.page-wrapper-3, .page-wrapper-4,
+.section-4, .section-5,
+.vr-scenes, .u-position-relative {
+  overflow: visible !important;
+}
+
+.slider-arrow, .slider-arrow-2,
+.cc-how-slide-left, .cc-how-slide-right {
+  z-index: 9999 !important;
+  pointer-events: auto !important;
+}
+
+.swiper, .swiper-wrapper, .swiper-slide {
+  pointer-events: auto;
+}
+
+/* ===== ARTERA Swiper thumbs should look like a vertical list ===== */
+.body-2 .vr-scenes [data-role="thumbs"] .swiper-wrapper{
+  flex-direction: column !important;
+}
+
+.body-2 .vr-scenes [data-role="thumbs"] .swiper-slide{
+  width: 100% !important;
+  height: auto !important;
+  margin: 0 !important;
+
+  /* ✅ GIẢM khoảng trống tổng giữa các item */
+  padding: 8px 12px !important;     /* trước: 12px 16px */
+  line-height: 1.25 !important;     /* trước: 1.35 */
+}
+
+/* giảm khoảng cách giữa title và description trong item active */
+.body-2 .vr-scenes [data-role="thumbs"] .h4{
+  margin: 0 0 4px 0 !important;     /* trước: margin-bottom 6px */
+}
+
+.body-2 .vr-scenes [data-role="thumbs"] .swiper-slider_details-collapse{
+  margin-top: 4px !important;       /* trước: 6px */
+}
+
+/* ✅ GIỮ NGUYÊN khung active (không chỉnh padding card) */
+/* ✅ CHỈ giảm khoảng cách giữa các item (spacing list) */
+
+.body-2 #how-slider-thumbs-1 .swiper-wrapper,
+.body-2 #how-slider-thumbs-2 .swiper-wrapper,
+.body-2 #how-slider-thumbs-3 .swiper-wrapper{
+  display: flex !important;
+  flex-direction: column !important;
+
+  justify-content: flex-start !important;  /* tránh bị rải đều */
+  align-items: stretch !important;
+
+  gap: 1px !important;                     /* 🔥 chỉnh khoảng cách giữa items ở đây */
+  height: auto !important;
+}
+
+/* (Optional) nếu webflow gán margin-bottom cho slide làm nó rộng, thì reset margin thôi
+   KHÔNG đụng padding nên khung active vẫn y nguyên */
+.body-2 #how-slider-thumbs-1 .swiper-slide,
+.body-2 #how-slider-thumbs-2 .swiper-slide,
+.body-2 #how-slider-thumbs-3 .swiper-slide{
+  margin: 0 !important;
+}
+
+/* Chỉ VR Scenes (thumbs-1) */
+.body-2 #how-slider-thumbs-1 .swiper-slide-thumb-active h3,
+.body-2 #how-slider-thumbs-1 .swiper-slide-thumb-active .h4{
+  color:#fff !important;
+}
+
+/* Hover / Focus */
+#how-slide-left-1:hover,
+#how-slide-right-1:hover,
+#how-slide-left-1:focus-visible,
+#how-slide-right-1:focus-visible{
+  background-color: #8585aa !important;  /* tím */
+  border-color: #8585aa !important;
+}
+
+/* =========================================================
+   VR SCENES (#1) — RIGHT SIDE = PORTRAIT CARD STACK (LIKE SAMPLE)
+   Scope: ONLY .vr-scenes--1
+   ========================================================= */
+
+   .body-2 .vr-scenes--1{
+    --vr1-card-w: 320px;
+    --vr1-card-h: 420px;
+    --vr1-r: 22px;
+  }
+
+  /* nhỏ hơn giống mẫu */
+  @media (max-width: 520px){
+    .body-2 .vr-scenes--1{
+      --vr1-card-w: 300px;
+      --vr1-card-h: 400px;
+    }
+  }
+
+  /* Khung phải: canh giữa card */
+  .body-2 .vr-scenes--1 .u-position-relative.u-h-100._1{
+    position: relative !important;
+    display: grid !important;
+    place-items: center !important;
+    overflow: visible !important; /* arrow có thể tràn ra ngoài */
+  }
+
+  /* ====== 1) ẨN “HÌNH SWIPER” nhưng KHÔNG ẩn arrow ======
+     (KHÔNG dùng opacity trên #how-slider-1 vì sẽ làm arrow mờ theo)
+  */
+  .body-2 .vr-scenes--1 #how-slider-1{
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 2 !important;
+    overflow: visible !important;
+  }
+
+  /* chỉ ẩn wrapper chứa ảnh slide */
+  .body-2 .vr-scenes--1 #how-slider-1 .swiper-wrapper{
+    opacity: 0 !important;
+
+  }
+
+  /* đảm bảo slide không gây “dàn ngang” */
+  .body-2 .vr-scenes--1 #how-slider-1 .swiper-slide{
+    width: 100% !important;
+  }
+
+  /* ====== 2) CARD STACK LAYER (hiển thị thật) ====== */
+  .body-2 .vr-scenes--1 .vr1-stack{
+    position: relative !important;
+    width: var(--vr1-card-w) !important;
+    height: var(--vr1-card-h) !important;
+    z-index: 5 !important;
+    display: grid !important;
+    place-items: center !important;
+    pointer-events: none !important; /* click để arrow xử lý */
+  }
+
+  /* Card base */
+  .body-2 .vr-scenes--1 .vr1-card{
+    position: absolute !important;
+    width: var(--vr1-card-w) !important;
+    height: var(--vr1-card-h) !important;
+    border-radius: var(--vr1-r) !important;
+    overflow: hidden !important;
+    background: #222 !important;
+    transform: translateZ(0) !important;
+  }
+
+  /* Active card */
+  .body-2 .vr-scenes--1 .vr1-card.vr1-active{
+    z-index: 10 !important;
+    transition: transform 320ms ease, opacity 320ms ease !important;
+    box-shadow: none !important;
+  }
+
+  /* Active bg */
+  .body-2 .vr-scenes--1 .vr1-card__bg{
+    position: absolute !important;
+    inset: 0 !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  /* Overlay gradient giống mẫu */
+  .body-2 .vr-scenes--1 .vr1-card.vr1-active::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: linear-gradient(to top,
+      rgba(0,0,0,.55),
+      rgba(0,0,0,.10) 55%,
+      rgba(0,0,0,.05)
+    );
+    pointer-events:none;
+  }
+
+  /* ====== 3) BEHIND / GHOST cards ====== */
+  .body-2 .vr-scenes--1 .vr1-behind{
+    position:absolute !important;
+    inset:0 !important;
+    z-index: 5 !important;
+  }
+
+  .body-2 .vr-scenes--1 .vr1-ghost{
+    position:absolute !important;
+    inset: 0 !important;
+    border-radius: var(--vr1-r) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    filter: blur(3px) saturate(1.02) !important;
+    box-shadow: 0 20px 70px rgba(0,0,0,.10) !important;
+  }
+
+  .body-2 .vr-scenes--1 .vr1-ghost-1{
+    z-index: 3 !important;
+    transform: translateY(-27px) scale(.935) !important;
+    opacity:.82 !important;
+  }
+  .body-2 .vr-scenes--1 .vr1-ghost-2{
+    z-index: 2 !important;
+    transform: translateY(-51px) scale(.88) !important;
+    opacity:.66 !important;
+  }
+  .body-2 .vr-scenes--1 .vr1-ghost-3{
+    display:none !important;
+  }
+
+  /* ====== 4) BG BLUR PANEL (2 layers crossfade) ====== */
+  .body-2 .vr-scenes--1 .vr1-bgpanel{
+    position:absolute !important;
+    inset:0 !important;
+    z-index:1 !important;
+    display:grid !important;
+    place-items:center !important;
+  }
+
+  .body-2 .vr-scenes--1 .vr1-bgpanel__layer{
+    position:absolute !important;
+    width: calc(var(--vr1-card-w) * 1.38) !important;
+    height: calc(var(--vr1-card-h) * 1.38) !important;
+    border-radius: calc(var(--vr1-r) * 2.4) !important;
+
+    background-size: cover !important;
+    background-position: center !important;
+
+    transform: translateY(-14px) scale(1.42) !important;
+    filter: blur(160px) saturate(1.25) brightness(1.25) !important;
+    will-change: opacity, transform, filter;
+    transform: translateZ(0) translateY(-14px) scale(1.42) !important;
+
+    opacity: 0 !important;
+    transition: opacity 260ms ease !important;
+
+    -webkit-mask-image:
+      linear-gradient(90deg, transparent 0%, #000 22%, #000 78%, transparent 100%),
+      linear-gradient(0deg,  transparent 0%, #000 18%, #000 82%, transparent 100%);
+    -webkit-mask-composite: source-in;
+
+    mask-image:
+      linear-gradient(90deg, transparent 0%, #000 22%, #000 78%, transparent 100%),
+      linear-gradient(0deg,  transparent 0%, #000 18%, #000 82%, transparent 100%);
+    mask-composite: intersect;
+  }
+
+  .body-2 .vr-scenes--1 .vr1-bgpanel__layer.is-on{
+    opacity: .55 !important;
+  }
+
+  /* ====== 5) ARROWS: giữ như cũ của bạn (đang đẹp) nhưng đảm bảo nó nằm trên ====== */
+  .body-2 .vr-scenes--1 #how-slide-left-1,
+  .body-2 .vr-scenes--1 #how-slide-right-1{
+    z-index: 20 !important;
+    pointer-events: auto !important;
+  }
+
+  /* ✅ VR Scenes #1: tuyệt đối không cắt layer blur */
+.body-2 .vr-scenes--1,
+.body-2 .vr-scenes--1 .container-16,
+.body-2 .vr-scenes--1 .column-3,
+.body-2 .vr-scenes--1 .col,
+.body-2 .vr-scenes--1 .u-position-relative,
+.body-2 .vr-scenes--1 .u-position-relative.u-h-100{
+  overflow: visible !important;
+}
+
+/* =========================================================
+   VR SCENES (#1) — REMOVE DARK GREY BACK PLATES
+   Scope: ONLY .vr-scenes--1
+   ========================================================= */
+   .body-2 .vr-scenes--1 .vr1-behind,
+   .body-2 .vr-scenes--1 .vr1-ghost{
+     display: none !important;
+   }
+
+/* =========================================================
+   VR SCENES (#1) — ARROWS ON TOP
+   Scope: ONLY .vr-scenes--1
+   ========================================================= */
+   .body-2 .vr-scenes--1 #how-slide-left-1,
+   .body-2 .vr-scenes--1 #how-slide-right-1{
+     position: absolute !important;
+     top: 50% !important;
+     transform: translateY(-50%) !important;
+
+     z-index: 9999 !important;   /* ✅ cao nhất */
+     pointer-events: auto !important;
+   }
+
+   /* đảm bảo icon cũng nổi */
+   .body-2 .vr-scenes--1 #how-slide-left-1 *,
+   .body-2 .vr-scenes--1 #how-slide-right-1 *{
+     pointer-events: none;
+   }
+
+   /* =========================================================
+   VR SCENES (#1) — FIX LAYERING (ARROWS ON TOP) + REMOVE DARK GREY
+   Scope: ONLY .vr-scenes--1
+   Paste at END of style.css
+   ========================================================= */
+
+/* 1) Đảm bảo container tạo stacking context rõ ràng */
+.body-2 .vr-scenes--1 .u-position-relative.u-h-100._1{
+  position: relative !important;
+  z-index: 0 !important;
+}
+
+/* 2) Card-stack nằm dưới */
+.body-2 .vr-scenes--1 .vr1-stack{
+  z-index: 5 !important;
+}
+
+/* 3) Swiper (chỉ để giữ nav/logic) nằm TRÊN card-stack */
+.body-2 .vr-scenes--1 #how-slider-1{
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 50 !important;          /* ✅ quan trọng */
+  overflow: visible !important;
+}
+
+/* 4) Ẩn phần hình slide Swiper (nhưng giữ arrow) */
+.body-2 .vr-scenes--1 #how-slider-1 .swiper-wrapper{
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* 5) Arrow luôn nổi trên tất cả */
+.body-2 .vr-scenes--1 #how-slide-left-1,
+.body-2 .vr-scenes--1 #how-slide-right-1{
+  z-index: 99999 !important;       /* ✅ cao nhất */
+  pointer-events: auto !important;
+}
+
+/* ---------------------------------------------------------
+   REMOVE “DARK GREY PLATES”
+   --------------------------------------------------------- */
+
+/* A) Tắt hẳn ghost plates (thứ hay tạo 2 tấm xám sau card) */
+.body-2 .vr-scenes--1 .vr1-behind,
+.body-2 .vr-scenes--1 .vr1-ghost,
+.body-2 .vr-scenes--1 .vr1-ghost-1,
+.body-2 .vr-scenes--1 .vr1-ghost-2,
+.body-2 .vr-scenes--1 .vr1-ghost-3{
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* B) Nếu vẫn còn “mảng xám” do nền card, cho card trong suốt */
+.body-2 .vr-scenes--1 .vr1-card{
+  background: transparent !important;
+}
+
+/* C) Đảm bảo ảnh bg active vẫn fill + clip đúng */
+.body-2 .vr-scenes--1 #vr1ActiveCard{
+  overflow: hidden !important;
+  border-radius: var(--vr1-r) !important;
+}
+.body-2 .vr-scenes--1 #vr1ActiveBg{
+  border-radius: inherit !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+/* =========================================================
+   VR SCENES (#1) — FIX: remove dark grey plate from #how-slider-1
+   Keep arrows on top, keep card-stack visible
+   Scope: ONLY .vr-scenes--1
+   ========================================================= */
+
+/* 1) #how-slider-1 chỉ làm “host” cho arrows -> tuyệt đối trong suốt */
+.body-2 .vr-scenes--1 #how-slider-1,
+.body-2 .vr-scenes--1 #how-slider-1 *{
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Nếu Webflow/Swiper có pseudo element tạo nền */
+.body-2 .vr-scenes--1 #how-slider-1::before,
+.body-2 .vr-scenes--1 #how-slider-1::after{
+  content: none !important;
+  display: none !important;
+}
+
+/* 2) Chặn mọi click trên lớp swiper (vì nó phủ lên card-stack) */
+.body-2 .vr-scenes--1 #how-slider-1{
+  pointer-events: none !important;
+}
+
+/* 3) …nhưng cho phép click riêng 2 nút arrows */
+.body-2 .vr-scenes--1 #how-slide-left-1,
+.body-2 .vr-scenes--1 #how-slide-right-1{
+  pointer-events: auto !important;
+  z-index: 99999 !important;
+}
+
+/* 4) Đảm bảo card-stack vẫn nằm đúng lớp (không bị đè) */
+.body-2 .vr-scenes--1 .vr1-stack{
+  z-index: 10 !important;
+}
+
+/* 5) #how-slider-1 vẫn ở trên để arrows nổi, nhưng không che vì trong suốt */
+.body-2 .vr-scenes--1 #how-slider-1{
+  z-index: 20 !important;
+}
