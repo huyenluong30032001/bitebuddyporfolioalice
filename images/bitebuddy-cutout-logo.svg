@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200">
+  <defs>
+    <mask id="text-mask">
+      <rect x="0" y="0" width="800" height="200" fill="white"/>
+      <text x="50" y="130" font-size="100" font-family="Arial, sans-serif" font-weight="bold" fill="black">BITEBUDDY</text>
+    </mask>
+  </defs>
+  <rect x="0" y="0" width="800" height="200" fill="rgba(0,0,0,0.3)" mask="url(#text-mask)"/>
+</svg>
